@@ -35,7 +35,15 @@ var getAll = () => {
 };
 
 var getNote = (title) => {
-    console.log('Getting note', title);
+    console.log(`Getting note: ${title}`);
+    //fetch the notes
+    var notes = fetchNotes();
+    //notes.filter to only return notes who's title matches the title passed in
+    var filteredNotes = notes.filter((note) => note.title === title);
+    //going to be zero or 1 note
+    //filter will always return an array, return [0]
+    return filteredNotes[0];
+
 };
 
 var removeNote = (title) => {
@@ -49,9 +57,16 @@ var removeNote = (title) => {
     return notes.length !== filteredNotes.length;
 };
 
+var logNote = (note) => {
+    console.log('--');
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+};
+
 module.exports = {
     addNote, //same as addNote: addNote
     getAll,
     getNote,
-    removeNote
+    removeNote,
+    logNote
 };
